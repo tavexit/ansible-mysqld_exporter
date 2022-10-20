@@ -50,7 +50,7 @@
       when: not ansible_check_mode
   when: 
     - mysqld_exporter_binary_local_dir | length == 0
-    - mysqld_exporter_version not in installed_mysqld_exporter_version
+    - mysqld_exporter_version not in installed_mysqld_exporter_version.stdout
 
 - name: propagate locally distributed mysqld_exporter binary
   copy:
