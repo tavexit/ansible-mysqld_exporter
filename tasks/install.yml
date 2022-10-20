@@ -48,7 +48,7 @@
       notify:
         - restart mysqld exporter
       when: not ansible_check_mode
-  when: mysqld_exporter_binary_local_dir | length == 0
+  when: (mysqld_exporter_binary_local_dir | length == 0) and mysqld_exporter_version not in installed_node_exporter_version
 
 - name: propagate locally distributed mysqld_exporter binary
   copy:

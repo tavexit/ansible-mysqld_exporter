@@ -33,3 +33,13 @@
   with_items:
     - "{{ lookup('url', 'https://github.com/prometheus/mysqld_exporter/releases/download/v' + mysqld_exporter_version + '/sha256sums.txt', wantlist=True) | list }}"
   when: "('linux-' + (go_arch_map[ansible_architecture] | default(ansible_architecture)) + '.tar.gz') in item"
+
+- name: Get node exporter version
+  shell: node_exporter --version | head -1 | cut -d" " -f3
+  args:
+    executable: /bin/bash
+  changed_when: false
+  check_mode: false
+  register: installed_node_exporter_version
+  tags:
+    - skip_ansible_lint
