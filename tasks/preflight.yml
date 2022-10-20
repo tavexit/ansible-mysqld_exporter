@@ -35,7 +35,7 @@
   when: "('linux-' + (go_arch_map[ansible_architecture] | default(ansible_architecture)) + '.tar.gz') in item"
 
 - name: Get mysqld exporter version
-  shell: mysqld_exporter --version 2>&1 | head -1 | cut -d" " -f3
+  shell: /usr/local/bin/mysqld_exporter --version 2>&1 | head -1 | cut -d" " -f3
   args:
     executable: /bin/bash
   changed_when: false
